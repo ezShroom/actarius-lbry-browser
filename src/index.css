@@ -6,8 +6,9 @@
 
 body {
     font-family: 'Open Sans';
-    margin: auto;
-    max-width: 38rem;
-    padding: 2rem;
-	background-color: #ffcba4;
+}
+
+#urlBar, #urlInput {
+	box-sizing: border-box;
+	width: 100%;
 }
