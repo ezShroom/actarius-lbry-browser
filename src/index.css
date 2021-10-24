@@ -1,0 +1,12 @@
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url(OpenSans-Regular.woff2);
+}
+
+body {
+    font-family: 'Open Sans';
+    margin: auto;
+    max-width: 38rem;
+    padding: 2rem;
+}
