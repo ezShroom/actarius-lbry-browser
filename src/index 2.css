@@ -6,14 +6,7 @@
 
 body {
     font-family: 'Open Sans';
-}
-
-#urlBar, #urlInput {
-	box-sizing: border-box;
-	width: 100%;
-}
-
-webview {
-	height: 400px;
-	width: 400px;
+    margin: auto;
+    max-width: 38rem;
+    padding: 2rem;
 }
