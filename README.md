@@ -6,5 +6,5 @@ We want to develop a user-friendly, open-source lbry network browser with minima
 ## Licensing
 The project is based on open-source principles, and it is licensed under MIT license which is also the same as LBRY license.
 
-https://opensource.org/licenses/MIT 
+https://opensource.org/licenses/MIT<br/>
 https://en.wikipedia.org/wiki/MIT_License 
