@@ -12,8 +12,12 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
-  "keywords": [],
+  "keywords": ["Web Browser", "LBRY", "Electron"],
   "author": "shroom",
+  "contributors": [
+    {"name":"Oscar Sanderson","email":"sandrolinux@aol.com","url":"https://sandrolinux.com/"},
+    {"name":"Lav Radis","url":"https://github.com/LavRadis"}
+  ],
   "license": "MIT",
   "config": {
     "forge": {
