@@ -18,6 +18,13 @@
     {"name":"Oscar Sanderson","email":"sandrolinux@aol.com","url":"https://sandrolinux.com/"},
     {"name":"Lav Radis","url":"https://github.com/LavRadis"}
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shroom2020/actarius-lbry-browser.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Shroom2020/actarius-lbry-browser/issues"
+  },
   "license": "MIT",
   "config": {
     "forge": {
