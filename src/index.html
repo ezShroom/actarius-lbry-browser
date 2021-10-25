@@ -5,6 +5,7 @@
     	<title>Actarius v0.0.2</title>
     	<link rel="stylesheet" href="index.css">
 		<script src="browser.js" defer></script>
+		<script src="preferences/bookmark.js"></script>
   	</head>
   	<body>
 		<div id="container">
@@ -12,7 +13,7 @@
 				<img src="res/arrowBack.svg" alt="Go back" height="40">
 				<img src="res/arrowForward.svg"s alt="Go back" height="40">
 				<input type="text" name="urlInput" id="urlInput" placeholder="Type URL or search query">
-			    <img src="res/bookmark.svg" alt="Bookmarks" height="40">
+			    <img src="res/bookmark.svg" alt="Bookmarks" onclick="bookMark()" height="40">
 			</div>
 			<webview src="https://duckduckgo.com/" id="webview"></webview>
 		</div>
