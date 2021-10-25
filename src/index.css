@@ -20,7 +20,7 @@ body, html {
 	box-sizing: border-box;
 	width: 100%;
 	border: none;
-	font-size: 0.8rem;
+	font-size: 1rem;
 }
 #urlBar {
 	display: flex;
@@ -30,7 +30,7 @@ body, html {
 	margin: 0.3em;
 }
 #urlInput {
-	padding: 0.2em 0.5em 0.2em 0.5em;
+	padding: 0.2em 0.3em 0.2em 0.3em;
 	outline: none;
 	background-color: #e5e5e5;
 	border: 1px solid #e5e5e5;
