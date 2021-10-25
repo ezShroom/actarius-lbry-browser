@@ -5,16 +5,17 @@
 }
 
 /* Set Open Sans as font for every element on the page */
-
 body, input {
     font-family: 'Open Sans', sans-serif;
 }
 
+/* Remove padding and margin from edges of window */
 body, html {
 	padding: 0;
 	margin: 0;
 }
 
+/* Style URL bar and input */
 #urlBar, #urlInput {
 	box-sizing: border-box;
 	width: 100%;
@@ -39,13 +40,14 @@ body, html {
 	border: 1px solid #fcaf2a;
 }
 
-
+/* Minor modifications for #container (contains entire browser window) */
 #container {
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
 }
 
+/* Ensure page content takes entire remaining space */
 webview {
 	height: 100%;
 	width: 100%;
