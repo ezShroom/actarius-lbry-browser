@@ -3,6 +3,7 @@
   "productName": "actarius",
   "version": "0.0.2",
   "description": "An Electron-based browser that can view LBRY URLs.",
+  "private": true,
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
