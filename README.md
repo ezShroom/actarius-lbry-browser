@@ -1,4 +1,4 @@
-# Actarius lbry browser 
+# Actarius LBRY browser 
 ## An Electron-based browser that can view LBRY URLs
 The LBRY network is dominated by apps developed by LBRY Inc (such as Odysee and the LBRY Desktop app) as the main way to access content. 
 There are other, minor, solutions like the terminal-based FastLBRY project. We find this to be unintuitive, insufficient, and/or too centralized.
