@@ -32,7 +32,11 @@ body, html {
 	padding: 0.4em;
 	outline: none;
 	background-color: #e5e5e5;
+	border: 1px solid #e5e5e5;
 	border-radius: 2em;
+}
+#urlInput:focus {
+	border: 1px solid #fcaf2a;
 }
 
 
