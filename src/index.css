@@ -23,6 +23,7 @@ body, html {
 }
 #urlBar {
 	display: flex;
+	background-color: #fafafa;
 }
 #urlBar * {
 	margin: 0.3em;
@@ -30,7 +31,7 @@ body, html {
 #urlInput {
 	padding: 0.4em;
 	outline: none;
-	background-color: #efefef;
+	background-color: #e5e5e5;
 	border-radius: 2em;
 }
 
