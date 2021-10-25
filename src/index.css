@@ -1,7 +1,7 @@
 
 @font-face {
 	font-family: 'Open Sans';
-	src: url(OpenSans-Regular.woff2);
+	src: url(res/OpenSans-Regular.woff2);
 }
 
 /* Set Open Sans as font for every element on the page */
