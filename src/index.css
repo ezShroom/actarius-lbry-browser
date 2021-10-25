@@ -19,7 +19,21 @@ body, html {
 	box-sizing: border-box;
 	width: 100%;
 	border: none;
+	font-size: 1rem;
 }
+#urlBar {
+	display: flex;
+}
+#urlBar * {
+	margin: 0.3em;
+}
+#urlInput {
+	padding: 0.4em;
+	outline: none;
+	background-color: #efefef;
+	border-radius: 2em;
+}
+
 
 #container {
 	display: flex;
