@@ -6,4 +6,4 @@ Electron is the framework that Actarius is built on.
 ## [NPM](https://www.npmjs.com/)
 NPM is used for package installation.
 ## [NodeJS](https://nodejs.org/)
-The Javascript runtime environment Electron uses.  
+The JavaScript runtime environment that Electron uses.  
