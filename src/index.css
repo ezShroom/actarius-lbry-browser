@@ -4,13 +4,21 @@
 	src: url(OpenSans-Regular.woff2);
 }
 
-body {
-    font-family: 'Open Sans';
+/* Set Open Sans as font for every element on the page */
+
+body, input {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body, html {
+	padding: 0;
+	margin: 0;
 }
 
 #urlBar, #urlInput {
 	box-sizing: border-box;
 	width: 100%;
+	border: none;
 }
 
 #container {
