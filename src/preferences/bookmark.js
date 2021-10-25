@@ -1,8 +1,8 @@
-function bookMark() {
-const Store = require('electron-store');
+function bookmark() {
+    const Store = require('electron-store');
 
-const store = new Store();
+    const store = new Store();
 
-store.set('bookmark', 'set');
-console.log(store.get('set'));
+    store.set('bookmark', 'set');
+    console.log(store.get('set'));
 }
