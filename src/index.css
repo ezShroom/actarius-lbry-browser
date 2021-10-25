@@ -21,6 +21,7 @@ body, html {
 	width: 100%;
 	border: none;
 	font-size: 0.9rem;
+	text-align: center;
 }
 #urlBar {
 	display: flex;
