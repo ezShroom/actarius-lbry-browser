@@ -6,7 +6,6 @@
 
 body {
     font-family: 'Open Sans';
-	background-color: #ffcba4;
 }
 
 #urlBar, #urlInput {
@@ -14,7 +13,13 @@ body {
 	width: 100%;
 }
 
+#container {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
 webview {
-	height: 400px;
-	width: 400px;
+	height: 100%;
+	width: 100%;
 }
