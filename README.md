@@ -4,6 +4,9 @@ The LBRY network is dominated by apps developed by LBRY Inc (such as Odysee and 
 There are other, minor, solutions like the terminal-based FastLBRY project. We find this to be unintuitive, insufficient, and/or too centralized.
 We want to develop a user-friendly, open-source LBRY network browser that communicates with the LBRY network with minimal dependency on any other entity.
 
+## ⚠️ Disclaimer 
+This project is in very early development. It will not function as a finished product.
+
 ## Licensing
 The project is based on open-source principles, and it is licensed under the MIT license. This license is also used by the LBRY SDK, an optional tool for the browser.
 
@@ -18,7 +21,5 @@ npm install
 npm start
 ```
 This project is written using [Electron](https://github.com/electron/electron).
-## Disclaimer 
-This project is in very early development. Please do not download this thinking it is a finished product.
 ## Issues
 Report any bugs you experience, or request features, in the [Issues](https://github.com/Shroom2020/actarius-lbry-browser/issues) tab.
