@@ -18,6 +18,7 @@ npm install
 npm start
 ```
 This project is written using [Electron](https://github.com/electron/electron).
-
+## Disclaimer 
+This project is in very early development. Please do not download this thinking it is a finished product.
 ## Issues
 Report any bugs you experience, or request features, in the [Issues](https://github.com/Shroom2020/actarius-lbry-browser/issues) tab.
