@@ -20,11 +20,12 @@ body, html {
 	box-sizing: border-box;
 	width: 100%;
 	border: none;
-	font-size: 1rem;
+	font-size: 0.9rem;
 }
 #urlBar {
 	display: flex;
 	background-color: #fafafa;
+	align-items: center;
 }
 #urlBar * {
 	margin: 0.3em;
