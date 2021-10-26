@@ -13,7 +13,9 @@ const createWindow = () => {
     	height: 600,
 		autoHideMenuBar: true,
     	webPreferences: {
-      		webviewTag: true
+      		webviewTag: true,
+			preload: path.join(__dirname, 'preload.js'),
+			contextIsolation: true
     	}
   	});
 
@@ -27,13 +29,13 @@ const createWindow = () => {
 	session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
 		switch (process.platform) {
 			case 'darwin':
-				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11.5; rv:90.0) Gecko/20100101 Firefox/90.0'
+				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11.5; rv:93.0) Gecko/20100101 Firefox/93.0'
 				break
 			case 'win32':
-				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0'
+				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0'
 				break
 			case 'linux':
-				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0'
+				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/93.0'
 				break
 		}
 		callback({ cancel: false, requestHeaders: details.requestHeaders });
@@ -44,6 +46,23 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
+
+const contextMenu = require('electron-context-menu')
+
+app.on("web-contents-created", (e, contents) => {
+	contextMenu({
+	   window: contents,
+	   showSaveImageAs: true,
+	   showInspectElement: true,
+	   showSearchWithGoogle: false,
+	   prepend: (defaultActions, parameters, browserWindow) => [
+		   {
+			   label: 'Custom label!',
+			   visible: parameters.selectionText.trim().length > 0
+		   }
+	   ]
+	});
+})
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

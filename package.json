@@ -27,6 +27,10 @@
     {
       "name": "Lav Radis",
       "url": "https://github.com/LavRadis"
+    },
+    {
+      "name": "Shroom",
+      "email": "hello-shroom@protonmail.com"
     }
   ],
   "repository": {
@@ -65,8 +69,8 @@
     }
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
-    "electron-store": "^8.0.1"
+    "electron-context-menu": "^3.1.1",
+    "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.61",
