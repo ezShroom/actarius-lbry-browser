@@ -9,3 +9,9 @@ NPM is used for package installation.
 The JavaScript runtime environment that Electron uses.  
 ## [Linkify](https://github.com/Hypercontext/linkifyjs)
 Linkify is a library that Actarius uses to validate HTTP and HTTPS URLs.
+## [Electron Context Menu](https://github.com/sindresorhus/electron-context-menu)
+Allows webpages to have menus on right click.
+## [Marked](https://github.com/markedjs/marked)
+Converts markdown files on LBRY to HTML that can be displayed in the browser.
+## [DOMPurify](https://github.com/cure53/DOMPurify)
+Removes XSS attack vectors from provided HTML code.

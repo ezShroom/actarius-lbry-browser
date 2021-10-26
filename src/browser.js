@@ -85,8 +85,10 @@ async function viewContentViaOdyseeAPI() {
     const mimeType = lookupResultsJSON.result[urlInput.value].value.source.media_type
     switch (mimeType) {
         case 'text/markdown':
-            webview.loadURL(window.pathHelper.getContentUtilityURL('markdown'))
+            webview.loadURL(window.pathHelper.getContentUtilityURL('markdown') + '?url=' + urlResponseJSON.result.streaming_url)
             console.log(window.pathHelper.getContentUtilityURL('markdown'))
             break
+        default:
+            webview.loadURL(window.pathHelper.getContentUtilityURL('noContentUtility'))
     }
 }
