@@ -88,6 +88,9 @@ async function viewContentViaOdyseeAPI() {
             webview.loadURL(window.pathHelper.getContentUtilityURL('markdown') + '?url=' + urlResponseJSON.result.streaming_url)
             console.log(window.pathHelper.getContentUtilityURL('markdown'))
             break
+        case 'text/plain':
+            webview.loadURL(urlResponseJSON.result.streaming_url)
+            break
         default:
             webview.loadURL(window.pathHelper.getContentUtilityURL('noContentUtility'))
     }
