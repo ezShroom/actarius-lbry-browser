@@ -7,3 +7,5 @@ Electron is the framework that Actarius is built on.
 NPM is used for package installation.
 ## [NodeJS](https://nodejs.org/)
 The JavaScript runtime environment that Electron uses.  
+## [Linkify](https://github.com/Hypercontext/linkifyjs)
+Linkify is a library that Actarius uses to validate HTTP and HTTPS URLs.
