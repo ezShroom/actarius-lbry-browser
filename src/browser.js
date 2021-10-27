@@ -10,6 +10,7 @@ var webView = document.getElementById('webview')
 
 webView.addEventListener('did-navigate', async (event) => {
     if (event.url.startsWith('file://')) return
+    if (event.url.startsWith('https://cdn.lbryplayer.xyz/api/') && event.url.endsWith('?actariusDisplay=false')) return
 
     // URL changed and the webview is showing a different page than before
 
@@ -107,7 +108,7 @@ async function viewContentViaOdyseeAPI() {
             console.log(window.pathHelper.getContentUtilityURL('markdown'))
             break
         case 'text/plain':
-            webview.loadURL(urlResponseJSON.result.streaming_url)
+            webview.loadURL(urlResponseJSON.result.streaming_url + '?actariusDisplay=false')
             break
         default:
             webview.loadURL(window.pathHelper.getContentUtilityURL('noContentUtility'))
