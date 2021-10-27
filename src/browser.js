@@ -8,13 +8,31 @@ String.prototype.replaceAll = function(search, replace) {
 var urlInput = document.getElementById('urlInput');
 var webView = document.getElementById('webview')
 
+webView.addEventListener('did-navigate', async (event) => {
+    if (event.url.startsWith('file://')) return
+
+    // URL changed and the webview is showing a different page than before
+
+    console.log('did-navigate: ' + event.url)
+    urlInput.value = event.url
+})
+webView.addEventListener('did-navigate-in-page', async (event) => {
+    if (event.url.startsWith('file://')) return
+
+    // URL changed without redirection
+
+    if (event.isMainFrame) {
+        console.log('did-navigate-in-page: ' + event.url)
+        urlInput.value = event.url
+    }
+})
+
 urlInput.addEventListener('keydown', async function (e) {
     if (e.key === 'Enter') {
 
         // Handle HTTPS and HTTP
 
         if (linkify.test(urlInput.value)) { // Checks if a valid HTTP / HTTPS URL is requested
-            console.log('seemingly works');
             if (!urlInput.value.startsWith('https://') && !urlInput.value.startsWith('http://')) { // If a URL doesn't begin with a protocol scheme, webview will treat it as an invalid URL
                 urlInput.value = 'https://' + urlInput.value
             }

@@ -83,10 +83,6 @@ a:active {
 .modest-no-decoration {
     text-decoration: none;
 }
-  
-html {
-    font-size: 1em;
-}
 
 body {
     line-height: 1.85;
@@ -165,12 +161,12 @@ textarea {
 }
   
 html {
-    font-size: 18px;
+    font-size: 1.15em;
     max-width: 100%;
 }
 
 body {
-    color: #444;
+    color: rgb(71, 71, 71);
     font-family: 'Open Sans', sans-serif;
     margin: 0 auto;
     max-width: 48rem;
@@ -211,4 +207,8 @@ td, th {
 }
 table {
     border-collapse: collapse;
+}
+
+strong, b {
+    color: rgb(0, 0, 0);
 }
