@@ -13,6 +13,6 @@ async function writeMarkdownResult() {
     console.log(findGetParameter('url'))
     var response = await fetch(findGetParameter('url'))
     var text = await response.text()
-    document.getElementById('body').innerHTML = DOMPurify.sanitize(window.markdownit({html: false, breaks: true, typographer: true, linkify: false}).render(text))
+    document.getElementById('body').innerHTML = DOMPurify.sanitize('<h1>' + findGetParameter('title') + '</h1>\n' + window.markdownit({html: false, breaks: true, typographer: true, linkify: false}).render(text))
 }
 writeMarkdownResult()

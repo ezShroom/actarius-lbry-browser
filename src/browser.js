@@ -98,13 +98,14 @@ async function viewContentViaOdyseeAPI() {
         "mode": "cors"
     })
     var lookupResultsJSON = await lookupResults.json();
+    console.log(lookupResultsJSON)
 
     // Map MIME type to content utility
 
     const mimeType = lookupResultsJSON.result[urlInput.value].value.source.media_type
     switch (mimeType) {
         case 'text/markdown':
-            webview.loadURL(window.pathHelper.getContentUtilityURL('markdown') + '?url=' + urlResponseJSON.result.streaming_url)
+            webview.loadURL(window.pathHelper.getContentUtilityURL('markdown') + '?url=' + urlResponseJSON.result.streaming_url + '&title=' + lookupResultsJSON.result[urlInput.value].value.title)
             console.log(window.pathHelper.getContentUtilityURL('markdown'))
             break
         case 'text/plain':
