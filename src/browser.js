@@ -112,6 +112,8 @@ async function viewContentViaOdyseeAPI() {
         case 'text/plain':
         case 'audio/mpeg':
         case 'audio/mp3':
+             webview.loadURL(urlResponseJSON.result.streaming_url + '?actariusDisplay=false')
+            break
         case 'audio/ogg':
         case 'video/mp4':
         case 'video/m4v':
