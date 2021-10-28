@@ -216,3 +216,7 @@ strong, b {
 #date {
     color:rgb(145, 145, 145);
 }
+
+img {
+    width: 100%;
+}
