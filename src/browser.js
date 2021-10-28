@@ -5,7 +5,8 @@ String.prototype.replaceAll = function(search, replace) {
     return this.split(search).join(replace);
 }    
 
-var urlInput = document.getElementById('urlInput');
+var urlInput = document.getElementById('urlInput')
+var urlBar = document.getElementById('urlBar')
 var webView = document.getElementById('webview')
 
 webView.addEventListener('did-navigate', async (event) => {
@@ -105,7 +106,7 @@ async function viewContentViaOdyseeAPI() {
     const mimeType = lookupResultsJSON.result[urlInput.value].value.source.media_type
     switch (mimeType) {
         case 'text/markdown':
-            webview.loadURL(window.pathHelper.getContentUtilityURL('markdown') + '?url=' + urlResponseJSON.result.streaming_url + '&title=' + lookupResultsJSON.result[urlInput.value].value.title)
+            webview.loadURL(window.pathHelper.getContentUtilityURL('markdown') + `?url=${urlResponseJSON.result.streaming_url}&title=${lookupResultsJSON.result[urlInput.value].value.title}&timestamp=${lookupResultsJSON.result[urlInput.value].timestamp}`)
             console.log(window.pathHelper.getContentUtilityURL('markdown'))
             break
         case 'text/plain':

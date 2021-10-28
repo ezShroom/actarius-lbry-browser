@@ -55,6 +55,7 @@ app.on("web-contents-created", (e, contents) => {
 	   showSaveImageAs: true,
 	   showInspectElement: true,
 	   showSearchWithGoogle: false,
+	   shouldShowMenu: (event, parameters) => {console.log(event);return true;},
 	   prepend: (defaultActions, parameters, browserWindow) => [
 		   {
 			   label: 'Custom label!',
