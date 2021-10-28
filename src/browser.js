@@ -110,8 +110,19 @@ async function viewContentViaOdyseeAPI() {
             console.log(window.pathHelper.getContentUtilityURL('markdown'))
             break
         case 'text/plain':
-            webview.loadURL(urlResponseJSON.result.streaming_url + '?actariusDisplay=false')
-            break
+        case 'audio/mpeg':
+        case 'audio/mp3':
+        case 'audio/ogg':
+        case 'video/mp4':
+        case 'video/m4v':
+        case 'video/webm':
+        case 'image/jpeg':
+        case 'image/jpg':
+        case 'image/png':
+        case 'image/webp':
+        case 'application/pdf':
+           webview.loadURL(urlResponseJSON.result.streaming_url + '?actariusDisplay=false')
+           break
         default:
             webview.loadURL(window.pathHelper.getContentUtilityURL('noContentUtility'))
     }
