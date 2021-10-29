@@ -20,6 +20,12 @@ Clone this repository to a local directory and run the following commands:
 npm install
 npm start
 ```
+
 This project is written using [Electron](https://github.com/electron/electron).
 ## Issues
 Report any bugs you experience, or request features, in the [Issues](https://github.com/Shroom2020/actarius-lbry-browser/issues) tab.
+
+## Donate to Actarius Maintainers
+LBRY Credits: ```
+lbc1q7d0g3x8jzff70t3xte7jqnyq264r6dead4k5s5
+```
