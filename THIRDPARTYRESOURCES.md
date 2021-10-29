@@ -17,3 +17,5 @@ Converts markdown files on LBRY to HTML that can be displayed in the browser.
 Removes XSS attack vectors from provided HTML code.
 ## [Modest](https://github.com/markdowncss/modest)
 Actarius uses a lightly modified version of the Modest stylesheet when displaying markdown files.
+## [MVP.css](https://andybrewer.github.io/mvp/)
+Actarius uses slightly modified MVP.css for internal pages
