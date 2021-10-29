@@ -5,9 +5,23 @@ String.prototype.replaceAll = function(search, replace) {
     return this.split(search).join(replace);
 }    
 
-var urlInput = document.getElementById('urlInput')
-var urlBar = document.getElementById('urlBar')
-var webView = document.getElementById('webview')
+const urlInput = document.getElementById('urlInput')
+const urlBar = document.getElementById('urlBar')
+const webView = document.getElementById('webview')
+const backButton = document.getElementById('arrowBack')
+const reloadButton = document.getElementById('reloadButton')
+const forwardButton = document.getElementById('arrowForward')
+
+// Button listeners
+backButton.addEventListener('click', (e) => {
+    webView.goBack()
+})
+forwardButton.addEventListener('click', (e) => {
+    webView.goForward()
+})
+reloadButton.addEventListener('click', (e) => {
+    webView.reload()
+})
 
 urlBar.addEventListener('contextmenu', (e) => {
     e.preventDefault();
