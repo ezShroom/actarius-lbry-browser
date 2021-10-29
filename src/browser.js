@@ -9,6 +9,10 @@ var urlInput = document.getElementById('urlInput')
 var urlBar = document.getElementById('urlBar')
 var webView = document.getElementById('webview')
 
+urlBar.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+})
+
 webView.addEventListener('did-navigate', async (event) => {
     if (event.url.startsWith('file://')) return
     if (event.url.startsWith('https://cdn.lbryplayer.xyz/api/') && event.url.endsWith('?actariusDisplay=false')) return
@@ -112,12 +116,8 @@ async function viewContentViaOdyseeAPI() {
         case 'text/plain':
         case 'audio/mpeg':
         case 'audio/mp3':
-             webview.loadURL(urlResponseJSON.result.streaming_url + '?actariusDisplay=false')
-            break
         case 'audio/ogg':
         case 'video/mp4':
-             webview.loadURL(urlResponseJSON.result.streaming_url + '?actariusDisplay=false')
-            break
         case 'video/m4v':
         case 'video/webm':
         case 'image/jpeg':
