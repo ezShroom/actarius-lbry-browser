@@ -12,6 +12,15 @@ const backButton = document.getElementById('arrowBack')
 const reloadButton = document.getElementById('reloadButton')
 const forwardButton = document.getElementById('arrowForward')
 
+// Set up tabs library
+var tabsContainer = document.querySelector('.chrome-tabs');
+var chromeTabs = new ChromeTabs();
+chromeTabs.init(tabsContainer);
+chromeTabs.addTab({
+    title: 'New Tab',
+    favicon: 'https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196'
+});
+
 // Button listeners
 backButton.addEventListener('click', (e) => {
     webView.goBack()
@@ -122,7 +131,9 @@ async function viewContentViaOdyseeAPI() {
     // Map MIME type to content utility
 
     const mimeType = lookupResultsJSON.result[urlInput.value].value.source.media_type
+    // TODO Check through custom content utilities before defaulting to built in ones
     switch (mimeType) {
+        // Switch through built-in content utilities if no custom ones are available
         case 'text/markdown':
             webview.loadURL(window.pathHelper.getContentUtilityURL('markdown') + `?url=${urlResponseJSON.result.streaming_url}&title=${lookupResultsJSON.result[urlInput.value].value.title}&timestamp=${lookupResultsJSON.result[urlInput.value].timestamp}`)
             console.log(window.pathHelper.getContentUtilityURL('markdown'))

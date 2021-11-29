@@ -4,13 +4,35 @@
     	<meta charset="UTF-8">
     	<title>Actarius v0.0.4</title>
     	<link rel="stylesheet" href="index.css">
+		<link rel="stylesheet" href="res/chrome-tabs.css">
 		<script src="browser.js" defer></script>
 		<script src="preferences/bookmark.js"></script>
 		<script src="res/linkify.min.js"></script>
 		<script src="res/linkify-string.min.js"></script>
+		<script src="res/draggabilly.pkgd.min.js"></script>
+		<script src="res/chrome-tabs.min.js"></script>
   	</head>
   	<body>
 		<div id="container">
+			<div class="chrome-tabs" style="--tab-content-margin: 9px">
+				<div class="chrome-tabs-content"></div>
+				<div class="chrome-tabs-bottom-bar"></div>
+				<!-- Styles to prevent flash after JS initialization -->
+				<style>
+					.chrome-tabs .chrome-tab {
+						width: 258px
+					}
+		
+					.chrome-tabs .chrome-tab:nth-child(1) {
+						transform: translate3d(0px, 0, 0)
+					}
+		
+					.chrome-tabs .chrome-tab:nth-child(2) {
+						transform: translate3d(239px, 0, 0)
+					}
+				</style>
+			</div>
+
 			<div id="urlBar">
 				<img src="res/arrowBack.svg" alt="Go back" height="40" id="arrowBack" class="browserBarButton">
 				<img src="res/arrowForward.svg" alt="Go forwards" height="40" id="arrowForward" class="browserBarButton">
@@ -18,6 +40,7 @@
 				<input type="text" name="urlInput" id="urlInput" placeholder="Type URL or search query">
 			    <img src="res/bookmark.svg" alt="Bookmarks" height="40" id="bookmarksButton" class="browserBarButton">
 			</div>
+
 			<webview src="https://duckduckgo.com/" id="webview"></webview>
 		</div>
   	</body>

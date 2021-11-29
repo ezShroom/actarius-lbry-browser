@@ -71,7 +71,9 @@
   "dependencies": {
     "electron-builder-squirrel-windows": "^22.14.5",
     "electron-context-menu": "^3.1.1",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "meow": "^10.1.2",
+    "trim-newlines": "^4.0.2"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.61",
@@ -79,6 +81,6 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.61",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
-    "electron": "15.3.0"
+    "electron": "^16.0.2"
   }
 }
