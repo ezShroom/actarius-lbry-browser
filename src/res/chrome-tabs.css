@@ -1,8 +1,6 @@
 .chrome-tabs {
   box-sizing: border-box;
   position: relative;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 12px;
   height: 46px;
   padding: 8px 3px 4px 3px;
   background: #dee1e6;
@@ -87,7 +85,7 @@
   z-index: 5;
 }
 .chrome-tabs .chrome-tab[active] .chrome-tab-background > svg .chrome-tab-geometry {
-  fill: #fff;
+  fill: #fafafa;
 }
 .chrome-tabs .chrome-tab:not([active]) .chrome-tab-background {
   transition: opacity 0.2s ease;
@@ -244,7 +242,7 @@
   height: 4px;
   left: 0;
   width: 100%;
-  background: #fff;
+  background: #fafafa;
   z-index: 10;
 }
 .chrome-tabs-optional-shadow-below-bottom-bar {

@@ -15,7 +15,7 @@ const forwardButton = document.getElementById('arrowForward')
 // Set up tabs library
 var tabsContainer = document.querySelector('.chrome-tabs');
 var chromeTabs = new ChromeTabs();
-chromeTabs.init(tabsContainer);
+chromeTabs.init(tabsContainer, { tabOverlapDistance: 14, minWidth: 45, maxWidth: 243 });
 chromeTabs.addTab({
     title: 'New Tab',
     favicon: 'https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196'
