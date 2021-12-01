@@ -49,13 +49,6 @@ body, html {
 	height: 100vh;
 }
 
-/*.chrome-tabs {
-	display: initial !important;
-	height: auto !important;
-	padding: auto !important;
-	width: auto !important;
-}*/
-
 /* Ensure page content takes entire remaining space */
 webview {
 	height: 100%;
@@ -85,4 +78,8 @@ img {
 #addTab {
 	flex-shrink: 0;
 	margin-right: 0.5em;
+	padding: 0.15em;
+}
+#addTab:hover {
+	background-color: #b8b8b8;
 }
