@@ -10,6 +10,7 @@
 .chrome-tabs * {
   box-sizing: inherit;
   font: inherit;
+  font-size: .78rem;
 }
 .chrome-tabs .chrome-tabs-content {
   position: relative;
@@ -239,7 +240,7 @@
 .chrome-tabs .chrome-tabs-bottom-bar {
   position: absolute;
   bottom: 0;
-  height: 4px;
+  height: 2px;
   left: 0;
   width: 100%;
   background: #fafafa;

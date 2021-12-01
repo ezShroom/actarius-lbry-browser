@@ -35,6 +35,9 @@ reloadButton.addEventListener('click', (e) => {
 urlBar.addEventListener('contextmenu', (e) => {
     e.preventDefault();
 })
+tabsContainer.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+})
 
 webView.addEventListener('did-navigate', async (event) => {
     if (event.url.startsWith('file://')) return
