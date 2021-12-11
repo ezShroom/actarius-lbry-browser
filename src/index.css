@@ -75,11 +75,11 @@ img {
 .chrome-tabs-content {
 	flex-grow: 1;
 }
-#addTab {
+#addTabButton {
 	flex-shrink: 0;
 	margin-right: 0.5em;
 	padding: 0.15em;
 }
-#addTab:hover {
+#addTabButton:hover {
 	background-color: #b8b8b8;
 }

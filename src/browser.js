@@ -5,21 +5,20 @@ String.prototype.replaceAll = function(search, replace) {
     return this.split(search).join(replace);
 }    
 
+// Initialise some stuff
 const urlInput = document.getElementById('urlInput')
 const urlBar = document.getElementById('urlBar')
 const webView = document.getElementById('webview')
 const backButton = document.getElementById('arrowBack')
 const reloadButton = document.getElementById('reloadButton')
 const forwardButton = document.getElementById('arrowForward')
+const addTabButton = document.getElementById('addTabButton')
+var highestTabIndex = 0
 
 // Set up tabs library
 var tabsContainer = document.querySelector('.chrome-tabs');
 var chromeTabs = new ChromeTabs();
-chromeTabs.init(tabsContainer, { tabOverlapDistance: 14, minWidth: 45, maxWidth: 243 });
-chromeTabs.addTab({
-    title: 'New Tab',
-    favicon: 'https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196'
-});
+chromeTabs.init(tabsContainer, { tabOverlapDistance: 14, minWidth: 45, maxWidth: 245 });
 
 // Button listeners
 backButton.addEventListener('click', (e) => {
@@ -31,6 +30,12 @@ forwardButton.addEventListener('click', (e) => {
 reloadButton.addEventListener('click', (e) => {
     webView.reload()
 })
+addTabButton.addEventListener('click', (e) => {
+    highestTabIndex++
+    chromeTabs.addTab({
+        title: 'New Tab'
+    })
+})
 
 urlBar.addEventListener('contextmenu', (e) => {
     e.preventDefault();
@@ -38,6 +43,8 @@ urlBar.addEventListener('contextmenu', (e) => {
 tabsContainer.addEventListener('contextmenu', (e) => {
     e.preventDefault();
 })
+
+// Listeners for webview
 
 webView.addEventListener('did-navigate', async (event) => {
     if (event.url.startsWith('file://')) return
@@ -59,32 +66,48 @@ webView.addEventListener('did-navigate-in-page', async (event) => {
     }
 })
 
+// Listeners for tabs
+
+tabsContainer.addEventListener('tabAdd', ({ detail }) => {
+    // When a tab is added, add an ID to it in the form of the ac-tab-id attribute
+    // Then, create a new webview with a matching ac-webview-id attribute
+    const tabElement = detail.tabEl
+    tabElement.setAttribute('ac-tab-id', highestTabIndex)
+})
+
+// Open first tab
+
+chromeTabs.addTab({
+    title: 'Home'
+});
+
+// Listener for enter in URL bar
+
 urlInput.addEventListener('keydown', async function (e) {
-    if (e.key === 'Enter') {
+    if (e.key !== 'Enter') return
 
-        // Handle HTTPS and HTTP
+    // Handle HTTPS and HTTP
 
-        if (linkify.test(urlInput.value)) { // Checks if a valid HTTP / HTTPS URL is requested
-            if (!urlInput.value.startsWith('https://') && !urlInput.value.startsWith('http://')) { // If a URL doesn't begin with a protocol scheme, webview will treat it as an invalid URL
-                urlInput.value = 'https://' + urlInput.value
-            }
-            webview.loadURL(urlInput.value)
-            return
+    if (linkify.test(urlInput.value)) { // Checks if a valid HTTP / HTTPS URL is requested
+        if (!urlInput.value.startsWith('https://') && !urlInput.value.startsWith('http://')) { // If a URL doesn't begin with a protocol scheme, webview will treat it as an invalid URL
+            urlInput.value = 'https://' + urlInput.value
         }
-
-        // Handle LBRY
-
-        if (urlInput.value.startsWith('lbry://')) {
-            viewContentViaOdyseeAPI()
-            return
-        }
-
-        // Handle search
-
-        const searchURL = 'https://duckduckgo.com/?q=$QUERY&t=ffab&ia=web'.replace('$QUERY', encodeURIComponent(urlInput.value).replaceAll('%20', '+'))
-        webview.loadURL(searchURL)
-        urlInput.value = searchURL
+        webview.loadURL(urlInput.value)
+        return
     }
+
+    // Handle LBRY
+
+    if (urlInput.value.startsWith('lbry://')) {
+        viewContentViaOdyseeAPI()
+        return
+    }
+
+    // Handle search
+
+    const searchURL = 'https://duckduckgo.com/?q=$QUERY&t=ffab&ia=web'.replace('$QUERY', encodeURIComponent(urlInput.value).replaceAll('%20', '+'))
+    webview.loadURL(searchURL)
+    urlInput.value = searchURL
 })
 
 async function viewContentViaOdyseeAPI() {
