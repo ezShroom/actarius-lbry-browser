@@ -19,10 +19,7 @@ var highestTabIndex = 0
 // Set up tabs library
 var tabsContainer = document.querySelector('.chrome-tabs');
 var chromeTabs = new ChromeTabs();
-chromeTabs.init(tabsContainer, { tabOverlapDistance: 14, minWidth: 45, maxWidth: 245 });
-chromeTabs.addTab({
-    title: 'Home'
-})
+chromeTabs.init(tabsContainer, { tabOverlapDistance: 14, minWidth: 45, maxWidth: 245 })
 
 // Button listeners
 backButton.addEventListener('click', (e) => {
@@ -72,7 +69,7 @@ function handleDidNavigateInPage(event) {
 currentWebview.addEventListener('did-navigate', handleDidNavigate)
 currentWebview.addEventListener('did-navigate-in-page', handleDidNavigateInPage)
 
-// Listeners for tabs
+// Listener for new tab
 
 tabsContainer.addEventListener('tabAdd', ({ detail }) => {
     // When a tab is added, add an ID to it in the form of the ac-tab-id attribute
@@ -104,6 +101,33 @@ tabsContainer.addEventListener('tabAdd', ({ detail }) => {
     // Add event listeners for the new webview
     currentWebview.addEventListener('did-navigate', handleDidNavigate)
     currentWebview.addEventListener('did-navigate-in-page', handleDidNavigateInPage)
+})
+
+chromeTabs.addTab({
+    title: 'Home'
+})
+
+// Listener for tab switch
+
+tabsContainer.addEventListener('activeTabChange', ({ detail }) => {
+    // When a tab is switched, get the ID of the new tab
+    const newTabId = detail.tabEl.getAttribute('ac-tab-id')
+
+    // Then, get the webview with the matching ID
+    const newWebview = document.querySelector(`webview[ac-webview-id="${newTabId}"]`)
+
+    // Hide the current webview
+    currentWebview.style.width = '0px'
+    currentWebview.style.height = '0px'
+    currentWebview.style.flex = '0 1'
+
+    // Show the new webview
+    newWebview.style.width = '100%'
+    newWebview.style.height = '100%'
+    newWebview.style.flex = '1 1'
+
+    // Set currentWebview to the new webview
+    currentWebview = newWebview
 })
 
 // Listener for enter in URL bar
