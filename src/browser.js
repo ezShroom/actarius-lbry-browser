@@ -126,8 +126,16 @@ tabsContainer.addEventListener('activeTabChange', ({ detail }) => {
     newWebview.style.height = '100%'
     newWebview.style.flex = '1 1'
 
+    // Remove the event listeners for the old webview
+    currentWebview.removeEventListener('did-navigate', handleDidNavigate)
+    currentWebview.removeEventListener('did-navigate-in-page', handleDidNavigateInPage)
+
     // Set currentWebview to the new webview
     currentWebview = newWebview
+
+    // Add event listeners for the new webview
+    currentWebview.addEventListener('did-navigate', handleDidNavigate)
+    currentWebview.addEventListener('did-navigate-in-page', handleDidNavigateInPage)
 })
 
 // Listener for enter in URL bar
