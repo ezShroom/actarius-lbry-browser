@@ -8,27 +8,31 @@ String.prototype.replaceAll = function(search, replace) {
 // Initialise some stuff
 const urlInput = document.getElementById('urlInput')
 const urlBar = document.getElementById('urlBar')
-const webView = document.getElementById('webview')
+var currentWebview = document.getElementById('initialWebview')
 const backButton = document.getElementById('arrowBack')
 const reloadButton = document.getElementById('reloadButton')
 const forwardButton = document.getElementById('arrowForward')
 const addTabButton = document.getElementById('addTabButton')
+const webContentContainer = document.getElementById('webContentContainer')
 var highestTabIndex = 0
 
 // Set up tabs library
 var tabsContainer = document.querySelector('.chrome-tabs');
 var chromeTabs = new ChromeTabs();
 chromeTabs.init(tabsContainer, { tabOverlapDistance: 14, minWidth: 45, maxWidth: 245 });
+chromeTabs.addTab({
+    title: 'Home'
+})
 
 // Button listeners
 backButton.addEventListener('click', (e) => {
-    webView.goBack()
+    currentWebview.goBack()
 })
 forwardButton.addEventListener('click', (e) => {
-    webView.goForward()
+    currentWebview.goForward()
 })
 reloadButton.addEventListener('click', (e) => {
-    webView.reload()
+    currentWebview.reload()
 })
 addTabButton.addEventListener('click', (e) => {
     highestTabIndex++
@@ -46,7 +50,7 @@ tabsContainer.addEventListener('contextmenu', (e) => {
 
 // Listeners for webview
 
-webView.addEventListener('did-navigate', async (event) => {
+function handleDidNavigate(event) {
     if (event.url.startsWith('file://')) return
     if (event.url.startsWith('https://cdn.lbryplayer.xyz/api/') && event.url.endsWith('?actariusDisplay=false')) return
 
@@ -54,8 +58,8 @@ webView.addEventListener('did-navigate', async (event) => {
 
     console.log('did-navigate: ' + event.url)
     urlInput.value = event.url
-})
-webView.addEventListener('did-navigate-in-page', async (event) => {
+}
+function handleDidNavigateInPage(event) {
     if (event.url.startsWith('file://')) return
 
     // URL changed without redirection
@@ -64,22 +68,43 @@ webView.addEventListener('did-navigate-in-page', async (event) => {
         console.log('did-navigate-in-page: ' + event.url)
         urlInput.value = event.url
     }
-})
+}
+currentWebview.addEventListener('did-navigate', handleDidNavigate)
+currentWebview.addEventListener('did-navigate-in-page', handleDidNavigateInPage)
 
 // Listeners for tabs
 
 tabsContainer.addEventListener('tabAdd', ({ detail }) => {
     // When a tab is added, add an ID to it in the form of the ac-tab-id attribute
-    // Then, create a new webview with a matching ac-webview-id attribute
     const tabElement = detail.tabEl
     tabElement.setAttribute('ac-tab-id', highestTabIndex)
+
+    // Then, create a new webview with a matching ac-webview-id attribute
+    const newWebview = document.createElement('webview')
+    newWebview.setAttribute('ac-webview-id', highestTabIndex)
+
+    // Go to the homepage (DuckDuckGo until custom new tab pages are implemented)
+    newWebview.setAttribute('src', 'https://duckduckgo.com/')
+
+    // Hide the old webview
+    currentWebview.style.width = '0px'
+    currentWebview.style.height = '0px'
+    currentWebview.style.flex = '0 1'
+
+    // Remove the event listeners for the old webview
+    currentWebview.removeEventListener('did-navigate', handleDidNavigate)
+    currentWebview.removeEventListener('did-navigate-in-page', handleDidNavigateInPage)
+
+    // Append the new webview to the webview container
+    webContentContainer.appendChild(newWebview)
+
+    // Set currentWebview to the new webview
+    currentWebview = newWebview
+
+    // Add event listeners for the new webview
+    currentWebview.addEventListener('did-navigate', handleDidNavigate)
+    currentWebview.addEventListener('did-navigate-in-page', handleDidNavigateInPage)
 })
-
-// Open first tab
-
-chromeTabs.addTab({
-    title: 'Home'
-});
 
 // Listener for enter in URL bar
 
@@ -92,7 +117,7 @@ urlInput.addEventListener('keydown', async function (e) {
         if (!urlInput.value.startsWith('https://') && !urlInput.value.startsWith('http://')) { // If a URL doesn't begin with a protocol scheme, webview will treat it as an invalid URL
             urlInput.value = 'https://' + urlInput.value
         }
-        webview.loadURL(urlInput.value)
+        currentWebview.loadURL(urlInput.value)
         return
     }
 
@@ -106,7 +131,7 @@ urlInput.addEventListener('keydown', async function (e) {
     // Handle search
 
     const searchURL = 'https://duckduckgo.com/?q=$QUERY&t=ffab&ia=web'.replace('$QUERY', encodeURIComponent(urlInput.value).replaceAll('%20', '+'))
-    webview.loadURL(searchURL)
+    currentWebview.loadURL(searchURL)
     urlInput.value = searchURL
 })
 
@@ -161,7 +186,7 @@ async function viewContentViaOdyseeAPI() {
     switch (mimeType) {
         // Switch through built-in content utilities if no custom ones are available
         case 'text/markdown':
-            webview.loadURL(window.pathHelper.getContentUtilityURL('markdown') + `?url=${urlResponseJSON.result.streaming_url}&title=${lookupResultsJSON.result[urlInput.value].value.title}&timestamp=${lookupResultsJSON.result[urlInput.value].timestamp}`)
+            currentWebview.loadURL(window.pathHelper.getContentUtilityURL('markdown') + `?url=${urlResponseJSON.result.streaming_url}&title=${lookupResultsJSON.result[urlInput.value].value.title}&timestamp=${lookupResultsJSON.result[urlInput.value].timestamp}`)
             console.log(window.pathHelper.getContentUtilityURL('markdown'))
             break
         case 'text/plain':
@@ -176,9 +201,9 @@ async function viewContentViaOdyseeAPI() {
         case 'image/png':
         case 'image/webp':
         case 'application/pdf':
-           webview.loadURL(urlResponseJSON.result.streaming_url + '?actariusDisplay=false')
+           currentWebview.loadURL(urlResponseJSON.result.streaming_url + '?actariusDisplay=false')
            break
         default:
-            webview.loadURL(window.pathHelper.getContentUtilityURL('noContentUtility'))
+            currentWebview.loadURL(window.pathHelper.getContentUtilityURL('noContentUtility'))
     }
 }

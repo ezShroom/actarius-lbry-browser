@@ -30,13 +30,13 @@ const createWindow = () => {
 	session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
 		switch (process.platform) {
 			case 'darwin':
-				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11.5; rv:93.0) Gecko/20100101 Firefox/93.0'
+				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11.5; rv:93.0) Gecko/20100101 Firefox/95.0'
 				break
 			case 'win32':
-				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0'
+				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/95.0'
 				break
 			case 'linux':
-				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/93.0'
+				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/95.0'
 				break
 		}
 		callback({ cancel: false, requestHeaders: details.requestHeaders });

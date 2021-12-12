@@ -50,7 +50,7 @@ body, html {
 }
 
 /* Ensure page content takes entire remaining space */
-webview {
+webview, #webContentContainer {
 	height: 100%;
 	width: 100%;
 }
