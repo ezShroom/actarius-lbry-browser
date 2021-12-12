@@ -136,6 +136,22 @@ tabsContainer.addEventListener('activeTabChange', ({ detail }) => {
     // Add event listeners for the new webview
     currentWebview.addEventListener('did-navigate', handleDidNavigate)
     currentWebview.addEventListener('did-navigate-in-page', handleDidNavigateInPage)
+
+    // Change value of URL input to the new webview's URL
+    urlInput.value = currentWebview.getURL()
+})
+
+// Listener for tab close
+
+tabsContainer.addEventListener('tabRemove', ({ detail }) => {
+    // When a tab is closed, get the ID of the tab
+    const tabId = detail.tabEl.getAttribute('ac-tab-id')
+
+    // Then, get the webview with the matching ID
+    const webview = document.querySelector(`webview[ac-webview-id="${tabId}"]`)
+
+    // Remove the webview
+    webview.remove()
 })
 
 // Listener for enter in URL bar

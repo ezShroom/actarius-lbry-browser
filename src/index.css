@@ -63,6 +63,7 @@ img {
 	transition: background-color .2s;
 	border-radius: 2em;
 	padding: 0.1em;
+	user-select: none;
 }
 .browserBarButton:hover {
 	background-color: #e5e5e5;
