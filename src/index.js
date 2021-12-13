@@ -15,8 +15,7 @@ const createWindow = () => {
     	webPreferences: {
       		webviewTag: true,
 			preload: path.join(__dirname, 'preload.js'),
-			contextIsolation: true,
-			sandbox: true
+			contextIsolation: true
     	}
   	});
 

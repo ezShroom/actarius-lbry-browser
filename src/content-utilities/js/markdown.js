@@ -38,5 +38,6 @@ async function writeMarkdownResult() {
     }
     console.log(dateArray.join(' '))
     document.getElementById('body').innerHTML = DOMPurify.sanitize(`<h1>${findGetParameter('title')}</h1>\n<p id="date">${dateArray.join(' ')}</p>\n${DOMPurify.sanitize(window.markdownit({html: false, breaks: true, typographer: true, linkify: false}).render(text))}`)
+    document.getElementById('title').innerHTML = findGetParameter('title')
 }
 writeMarkdownResult()

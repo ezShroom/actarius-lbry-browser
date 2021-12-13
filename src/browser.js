@@ -8,7 +8,7 @@ String.prototype.replaceAll = function(search, replace) {
 // Initialise some stuff
 const urlInput = document.getElementById('urlInput')
 const urlBar = document.getElementById('urlBar')
-var currentWebview = document.getElementById('initialWebview')
+var currentWebview
 const backButton = document.getElementById('arrowBack')
 const reloadButton = document.getElementById('reloadButton')
 const forwardButton = document.getElementById('arrowForward')
@@ -66,8 +66,11 @@ function handleDidNavigateInPage(event) {
         urlInput.value = event.url
     }
 }
-currentWebview.addEventListener('did-navigate', handleDidNavigate)
-currentWebview.addEventListener('did-navigate-in-page', handleDidNavigateInPage)
+function handlePageFaviconUpdates(event) {
+    console.log('page-favicon-updated: ' + event.favicons)
+
+    chromeTabs.updateTab(document.querySelector(`div[ac-tab-id="${this.getAttribute('ac-webview-id')}"]`), { favicon: event.favicons[0], title: this.getTitle() })
+}
 
 // Listener for new tab
 
@@ -83,14 +86,17 @@ tabsContainer.addEventListener('tabAdd', ({ detail }) => {
     // Go to the homepage (DuckDuckGo until custom new tab pages are implemented)
     newWebview.setAttribute('src', 'https://duckduckgo.com/')
 
-    // Hide the old webview
-    currentWebview.style.width = '0px'
-    currentWebview.style.height = '0px'
-    currentWebview.style.flex = '0 1'
+    // Check if this is the first tab - if it is, there isn't an old webview to change
+    if (highestTabIndex != 0) {
+        // Hide the old webview
+        currentWebview.style.width = '0px'
+        currentWebview.style.height = '0px'
+        currentWebview.style.flex = '0 1'
 
-    // Remove the event listeners for the old webview
-    currentWebview.removeEventListener('did-navigate', handleDidNavigate)
-    currentWebview.removeEventListener('did-navigate-in-page', handleDidNavigateInPage)
+        // Remove the event listeners for the old webview
+        currentWebview.removeEventListener('did-navigate', handleDidNavigate)
+        currentWebview.removeEventListener('did-navigate-in-page', handleDidNavigateInPage)
+    }
 
     // Append the new webview to the webview container
     webContentContainer.appendChild(newWebview)
@@ -101,6 +107,7 @@ tabsContainer.addEventListener('tabAdd', ({ detail }) => {
     // Add event listeners for the new webview
     currentWebview.addEventListener('did-navigate', handleDidNavigate)
     currentWebview.addEventListener('did-navigate-in-page', handleDidNavigateInPage)
+    currentWebview.addEventListener('page-favicon-updated', handlePageFaviconUpdates)
 })
 
 chromeTabs.addTab({
@@ -255,3 +262,16 @@ async function viewContentViaOdyseeAPI() {
             currentWebview.loadURL(window.pathHelper.getContentUtilityURL('noContentUtility'))
     }
 }
+
+// Poll the title of all tabs, every second 
+
+window.setInterval(() => {
+    document.querySelectorAll('div[ac-tab-id]').forEach(tabEl => {
+        if (typeof document.querySelector(`div[ac-tab-id="${tabEl.getAttribute('ac-tab-id')}"] div.chrome-tab-content div.chrome-tab-favicon`) === 'undefined') {
+            // There's no favicon for this tab, so we'll update the tab without it
+            chromeTabs.updateTab(tabEl, { title: document.querySelector(`webview[ac-webview-id="${tabEl.getAttribute('ac-tab-id')}"]`).getTitle() })
+        }
+        // TODO if there is a favicon, update the tab with it
+        chromeTabs.updateTab(tabEl, { title: document.querySelector(`webview[ac-webview-id="${tabEl.getAttribute('ac-tab-id')}"]`).getTitle() })
+    })
+}, 1000)
