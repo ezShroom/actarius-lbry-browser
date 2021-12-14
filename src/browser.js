@@ -108,6 +108,7 @@ tabsContainer.addEventListener('tabAdd', ({ detail }) => {
     currentWebview.addEventListener('did-navigate', handleDidNavigate)
     currentWebview.addEventListener('did-navigate-in-page', handleDidNavigateInPage)
     currentWebview.addEventListener('page-favicon-updated', handlePageFaviconUpdates)
+    currentWebview.addEventListener('new-window', (e) => console.log('new window event fired'))
 })
 
 chromeTabs.addTab({
@@ -159,6 +160,11 @@ tabsContainer.addEventListener('tabRemove', ({ detail }) => {
 
     // Remove the webview
     webview.remove()
+
+    // If there are no more tabs, close the window
+    if (document.querySelector('webview') == null) {
+        window.close()
+    }
 })
 
 // Listener for enter in URL bar
@@ -272,6 +278,6 @@ window.setInterval(() => {
             chromeTabs.updateTab(tabEl, { title: document.querySelector(`webview[ac-webview-id="${tabEl.getAttribute('ac-tab-id')}"]`).getTitle() })
         }
         // TODO if there is a favicon, update the tab with it
-        chromeTabs.updateTab(tabEl, { title: document.querySelector(`webview[ac-webview-id="${tabEl.getAttribute('ac-tab-id')}"]`).getTitle() })
+        chromeTabs.updateTab(tabEl, { title: document.querySelector(`webview[ac-webview-id="${tabEl.getAttribute('ac-tab-id')}"]`).getTitle(), favicon: document.querySelector(`div[ac-tab-id="${tabEl.getAttribute('ac-tab-id')}"] div.chrome-tab-content div.chrome-tab-favicon`).getAttribute('style').split('"')[1] })
     })
 }, 1000)
