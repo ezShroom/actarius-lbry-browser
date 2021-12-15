@@ -16,6 +16,7 @@
 		<div id="container">
 			<div class="chrome-tabs" style="--tab-content-margin: 9px">
 				<div class="chrome-tabs-content"></div>
+				<img src="res/plus.svg" alt="Add new tab" height="40" id="addTabButton" class="browserBarButton">
 				<div class="chrome-tabs-bottom-bar"></div>
 				<!-- Styles to prevent flash after JS initialization -->
 				<style>
@@ -40,8 +41,7 @@
 				<input type="text" name="urlInput" id="urlInput" placeholder="Type URL or search query">
 			    <img src="res/bookmark.svg" alt="Bookmarks" height="40" id="bookmarksButton" class="browserBarButton">
 			</div>
-
-			<webview src="https://duckduckgo.com/" id="webview"></webview>
+			<div id="webContentContainer"></div>
 		</div>
   	</body>
 </html>

@@ -49,28 +49,38 @@ body, html {
 	height: 100vh;
 }
 
-/*.chrome-tabs {
-	display: initial !important;
-	height: auto !important;
-	padding: auto !important;
-	width: auto !important;
-}*/
-
 /* Ensure page content takes entire remaining space */
-webview {
+webview, #webContentContainer {
 	height: 100%;
 	width: 100%;
 }
 
+/* Ensure consistency in buttons */
 img {
 	height: 2em;
 }
-
 .browserBarButton {
 	transition: background-color .2s;
 	border-radius: 2em;
 	padding: 0.1em;
+	user-select: none;
 }
 .browserBarButton:hover {
 	background-color: #e5e5e5;
+}
+
+/* Allow #addTab to take up any amount of space on the right, .chrome-tabs-content takes what remains */
+.chrome-tabs {
+	display: flex !important;
+}
+.chrome-tabs-content {
+	flex-grow: 1;
+}
+#addTabButton {
+	flex-shrink: 0;
+	margin-right: 0.5em;
+	padding: 0.15em;
+}
+#addTabButton:hover {
+	background-color: #b8b8b8;
 }

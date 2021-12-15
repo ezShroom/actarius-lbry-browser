@@ -20,6 +20,6 @@ Actarius uses a lightly modified version of the Modest stylesheet when displayin
 ## [MVP.css](https://andybrewer.github.io/mvp/)
 Actarius uses a lightly modified version of the MVP stylesheet when displaying internal pages such as the about page.
 ## [Chrome Tabs](https://github.com/adamschwartz/chrome-tabs)
-Provides design and some functionality for browser tabs.
+Provides design and some functionality for browser tabs. The version used in Actarius is slightly modified to adapt the library for an Electron browser.
 ## [Dragabilly](https://github.com/desandro/draggabilly)
 Used by the Chrome Tabs library to allow the user to rearrange tabs by dragging them.
