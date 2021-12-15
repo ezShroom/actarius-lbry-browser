@@ -16,11 +16,14 @@ const createWindow = () => {
       		webviewTag: true,
 			preload: path.join(__dirname, 'preload.js'),
 			contextIsolation: true
-    	}
+    	},
+		title: 'Actarius'
   	});
 
   	// and load the index.html of the app.
   	mainWindow.loadFile(path.join(__dirname, 'index.html'));
+
+	mainWindow.setTitle('Actarius')
 
   	// Open the DevTools.
   	// mainWindow.webContents.openDevTools();
