@@ -1,7 +1,7 @@
 {
-  "name": "actarius",
-  "productName": "actarius",
-  "version": "0.0.2",
+  "name": "Actarius",
+  "productName": "Actarius",
+  "version": "0.1.0",
   "description": "An Electron-based browser that can view LBRY URLs.",
   "private": true,
   "main": "src/index.js",
@@ -46,24 +46,42 @@
       "packagerConfig": {},
       "makers": [
         {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "actarius"
-          }
-        },
-        {
           "name": "@electron-forge/maker-zip",
           "platforms": [
             "darwin"
-          ]
+          ],
+          "config": {
+            "name": "Actarius",
+            "iconUrl": "./src/res/icon.icns",
+            "icon": "./src/res/icon.icns"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "platforms": [
+            "win32"
+          ],
+          "config": {
+            "name": "Actarius"
+          }
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
+          "platforms": [
+            "linux"
+          ],
+          "config": {
+            "name": "Actarius"
+          }
         },
         {
           "name": "@electron-forge/maker-rpm",
-          "config": {}
+          "platforms": [
+            "linux"
+          ],
+          "config": {
+            "name": "Actarius"
+          }
         }
       ]
     }
