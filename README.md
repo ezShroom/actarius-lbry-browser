@@ -1,3 +1,4 @@
+[![Latest Release: 0.1 Prerelease](https://i.postimg.cc/ncSwGRjj/latest-release-0-1-prerelease-1.png)](https://github.com/Shroom2020/actarius/releases)
 # Actarius LBRY browser 
 ## An Electron-based browser that can view LBRY URLs
 The LBRY network is dominated by apps developed by LBRY Inc (such as Odysee and the LBRY Desktop app) as the main way to access content. 
