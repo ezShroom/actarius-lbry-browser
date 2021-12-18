@@ -1,5 +1,5 @@
 {
-  "name": "Actarius",
+  "name": "actarius",
   "productName": "Actarius",
   "version": "0.1.0",
   "description": "An Electron-based browser that can view LBRY URLs.",
@@ -43,7 +43,10 @@
   "license": "MIT",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "src/res/icon",
+        "name": "Actarius"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-zip",
