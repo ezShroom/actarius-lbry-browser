@@ -69,6 +69,15 @@
           }
         },
         {
+          "name": "@electron-forge/maker-flatpak",
+          "platforms": [
+            "linux"
+          ],
+          "config": {
+            "name": "Actarius"
+          }
+        },
+        {
           "name": "@electron-forge/maker-deb",
           "platforms": [
             "linux"
