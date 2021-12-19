@@ -1,7 +1,7 @@
 {
   "name": "actarius",
   "productName": "Actarius",
-  "version": "0.1.0",
+  "version": "0.0.4",
   "description": "An Electron-based browser that can view LBRY URLs.",
   "private": true,
   "main": "src/index.js",
