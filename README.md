@@ -10,7 +10,8 @@ This project is in very early development. It will not function as a finished pr
 
 ## Licensing
 The project is based on open-source principles, and it is licensed under the OSSAL license. A similar, more permissive license is also used by the LBRY SDK, an optional tool for the browser.  
-OSSAL restricts usage of the project in redistributions or usages that require modifications to be published with public source code, such as the GPL family of licenses.
+OSSAL restricts usage of the project in redistributions or usages that require modifications to be published with public source code, such as the GPL family of licenses.  
+Versions of Actarius made before the 0.1 release use the MIT license, making them GPL-compatible.
 
 ## Running from source
 Make sure you have [NodeJS 14](https://nodejs.org/) or later installed on your system.  
