@@ -6,7 +6,8 @@ There are other, minor, solutions like the terminal-based FastLBRY project. We f
 We want to develop a user-friendly, open-source LBRY network browser that communicates with the LBRY network with minimal dependency on any other entity.
 
 ## ⚠️ Disclaimer 
-This project is in very early development. It will not function as a finished product.
+This project is in very early development. It will not function as a finished product.  
+Actarius is not intended to become a fully functional browser and it shouldn't be used as a daily driver. However, basic browsing can be performed using it.
 
 ## Licensing
 The project is based on open-source principles, and it is licensed under the OSSAL license. A similar, more permissive license is also used by the LBRY SDK, an optional tool for the browser.  
