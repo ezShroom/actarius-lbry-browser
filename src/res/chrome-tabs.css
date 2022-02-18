@@ -1,7 +1,7 @@
 .chrome-tabs {
   box-sizing: border-box;
   position: relative;
-  height: 46px;
+  min-height: 44px;
   padding: 8px 3px 4px 3px;
   background: #dee1e6;
   overflow: hidden;
@@ -19,7 +19,7 @@
 .chrome-tabs .chrome-tab {
   position: absolute;
   left: 0;
-  height: 36px;
+  min-height: 36px;
   width: 240px;
   border: 0;
   margin: 0;

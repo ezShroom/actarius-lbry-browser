@@ -49,13 +49,6 @@
       },
       "makers": [
         {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ],
-          "config": {}
-        },
-        {
           "name": "@electron-forge/maker-squirrel",
           "platforms": [
             "win32", "darwin"
@@ -73,6 +66,13 @@
           "name": "@electron-forge/maker-rpm",
           "platforms": [
             "linux", "darwin"
+          ],
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
           ],
           "config": {}
         }

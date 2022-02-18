@@ -69,7 +69,10 @@ function handleDidNavigateInPage(event) {
 function handlePageFaviconUpdates(event) {
     console.log('page-favicon-updated: ' + event.favicons)
 
-    chromeTabs.updateTab(document.querySelector(`div[ac-tab-id="${this.getAttribute('ac-webview-id')}"]`), { favicon: event.favicons[0], title: this.getTitle() })
+    if (typeof event.favicons[0] !== 'undefined')
+        chromeTabs.updateTab(document.querySelector(`div[ac-tab-id="${this.getAttribute('ac-webview-id')}"]`), { favicon: event.favicons[0], title: this.getTitle() })
+    else
+        chromeTabs.updateTab(document.querySelector(`div[ac-tab-id="${this.getAttribute('ac-webview-id')}"]`), { title: this.getTitle() })
 }
 
 // Listener for new tab
@@ -277,7 +280,14 @@ window.setInterval(() => {
             // There's no favicon for this tab, so we'll update the tab without it
             chromeTabs.updateTab(tabEl, { title: document.querySelector(`webview[ac-webview-id="${tabEl.getAttribute('ac-tab-id')}"]`).getTitle() })
         }
-        // TODO if there is a favicon, update the tab with it
-        chromeTabs.updateTab(tabEl, { title: document.querySelector(`webview[ac-webview-id="${tabEl.getAttribute('ac-tab-id')}"]`).getTitle(), favicon: document.querySelector(`div[ac-tab-id="${tabEl.getAttribute('ac-tab-id')}"] div.chrome-tab-content div.chrome-tab-favicon`).getAttribute('style').split('"')[1] })
+        
+        // If there is a favicon for this tab, update the tab with it. Otherwise, only update the title.
+        if (typeof document.querySelector(`div[ac-tab-id="${tabEl.getAttribute('ac-tab-id')}"] div.chrome-tab-content div.chrome-tab-favicon`) !== 'undefined')
+            chromeTabs.updateTab(tabEl, {
+                title: document.querySelector(`webview[ac-webview-id="${tabEl.getAttribute('ac-tab-id')}"]`).getTitle(), 
+                favicon: document.querySelector(`div[ac-tab-id="${tabEl.getAttribute('ac-tab-id')}"] div.chrome-tab-content div.chrome-tab-favicon`).getAttribute('style').split('"')[1]
+            })
+        else
+            chromeTabs.updateTab(tabEl, { title: document.querySelector(`webview[ac-webview-id="${tabEl.getAttribute('ac-tab-id')}"]`).getTitle() })
     })
 }, 1000)
