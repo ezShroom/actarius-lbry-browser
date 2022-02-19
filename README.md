@@ -7,7 +7,7 @@ We want to develop a user-friendly, open-source LBRY network browser that commun
 
 ## ⚠️ Disclaimer 
 This project is in very early development. It will not function as a finished product.  
-Actarius is not intended to become a fully functional browser and it shouldn't be used as a daily driver. However, basic browsing can be performed using it.
+Actarius is unlikely to become a fully functional browser. Using it as a daily driver is not a reccomended use case, especially at this stage.
 
 ## Licensing
 The project is based on open-source principles, and it is licensed under the OSSAL license. A similar, more permissive license is also used by the LBRY SDK, an optional tool for the browser.  
