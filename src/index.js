@@ -1,4 +1,4 @@
-const { app, BrowserWindow, session } = require('electron');
+const { app, BrowserView, BrowserWindow, session, ipcMain } = require('electron');
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -28,22 +28,42 @@ const createWindow = () => {
 
   	// Open the DevTools.
   	// mainWindow.webContents.openDevTools();
-	
+
+	// The browserViews array is used to keep track of all the BrowserViews. Their index is used to link them with a tab (the ac-tab-id attribute on tabs matches the index of the BrowserView in this array).
+	let browserViews = [];
+
+	// Google login doesn't behave nicely when the user agent is set to Chrome or the default Actarius user agent.
+	// A Firefox user agent, for some reason, works fine. This code intercepts the user agent on each request and sets it to Firefox, tailored to the user's OS.
+
 	var userAgent = '';
 	session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
 		switch (process.platform) {
 			case 'darwin':
-				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11.5; rv:93.0) Gecko/20100101 Firefox/95.0'
+				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 12.1; rv:97.0) Gecko/20100101 Firefox/97.0'
 				break
 			case 'win32':
-				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/95.0'
+				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Windows NT 11.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0'
 				break
 			case 'linux':
-				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/95.0'
+				details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0'
 				break
 		}
 		callback({ cancel: false, requestHeaders: details.requestHeaders });
 	});
+
+	// When a new tab is requested, create a new BrowserView and add it to the browserViews array. Then, make it replace the current BrowserView and send the index of the new BrowserView to the renderer process.
+	ipcMain.handle('new-tab', (event, windowSizeArray) => {
+		const newTabIndex = browserViews.push(new BrowserView({})) - 1
+		const browserView = browserViews[newTabIndex]
+		// If there is a BrowserView currently displaying on the BrowserWindow, remove it and add the new one. Otherwise, just add the new one.
+		if (mainWindow.getBrowserView()) mainWindow.removeBrowserView(mainWindow.getBrowserView())
+		mainWindow.setBrowserView(browserView)
+		browserView.setBounds({ x: 0, y: 86, width: windowSizeArray[0], height: windowSizeArray[1] - 86 })
+		browserView.setAutoResize({ width: true, height: true })
+		browserView.webContents.loadURL('https://www.duckduckgo.com/')
+
+		return newTabIndex
+	})
 };
 
 // This method will be called when Electron has finished

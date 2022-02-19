@@ -78,40 +78,7 @@ function handlePageFaviconUpdates(event) {
 // Listener for new tab
 
 tabsContainer.addEventListener('tabAdd', ({ detail }) => {
-    // When a tab is added, add an ID to it in the form of the ac-tab-id attribute
-    const tabElement = detail.tabEl
-    tabElement.setAttribute('ac-tab-id', highestTabIndex)
-
-    // Then, create a new webview with a matching ac-webview-id attribute
-    const newWebview = document.createElement('webview')
-    newWebview.setAttribute('ac-webview-id', highestTabIndex)
-
-    // Go to the homepage (DuckDuckGo until custom new tab pages are implemented)
-    newWebview.setAttribute('src', 'https://duckduckgo.com/')
-
-    // Check if this is the first tab - if it is, there isn't an old webview to change
-    if (highestTabIndex != 0) {
-        // Hide the old webview
-        currentWebview.style.width = '0px'
-        currentWebview.style.height = '0px'
-        currentWebview.style.flex = '0 1'
-
-        // Remove the event listeners for the old webview
-        currentWebview.removeEventListener('did-navigate', handleDidNavigate)
-        currentWebview.removeEventListener('did-navigate-in-page', handleDidNavigateInPage)
-    }
-
-    // Append the new webview to the webview container
-    webContentContainer.appendChild(newWebview)
-
-    // Set currentWebview to the new webview
-    currentWebview = newWebview
-
-    // Add event listeners for the new webview
-    currentWebview.addEventListener('did-navigate', handleDidNavigate)
-    currentWebview.addEventListener('did-navigate-in-page', handleDidNavigateInPage)
-    currentWebview.addEventListener('page-favicon-updated', handlePageFaviconUpdates)
-    currentWebview.addEventListener('new-window', (e) => console.log('new window event fired'))
+    window.browserViewAPI.newTab([window.innerWidth, window.innerHeight])
 })
 
 chromeTabs.addTab({
