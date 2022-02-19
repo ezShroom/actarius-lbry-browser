@@ -29,4 +29,6 @@ Report any bugs you experience, or request features, in the [Issues](https://git
 
 ## Donate to Actarius Maintainers
 ### LBRY Credits
+```
 bXVQxXL9LwYqUgmd2SRt7UthP2P9KfyCr2
+```
