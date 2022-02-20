@@ -3,7 +3,7 @@ String.prototype.replaceAll = function(search, replace) {
         return this.toString();
     }
     return this.split(search).join(replace);
-}    
+}
 
 // Initialise some stuff
 const urlInput = document.getElementById('urlInput')
@@ -14,7 +14,18 @@ const reloadButton = document.getElementById('reloadButton')
 const forwardButton = document.getElementById('arrowForward')
 const addTabButton = document.getElementById('addTabButton')
 const webContentContainer = document.getElementById('webContentContainer')
-var highestTabIndex = 0
+const leftSpacer = document.getElementById('left-whitespace')
+const rightSpacer = document.getElementById('right-whitespace')
+const LIGHT = false
+const DARK = true
+
+// Detect OS and decide how large the width of the spacers should be.
+// If on Linux, also unhide the custom controls.
+
+if (navigator.userAgent.includes('Macintosh')) {
+    // On macOS, the left spacer needs to make space for the traffic light controls and the right spacer can stay at its default width.
+    leftSpacer.style.width = '74px'
+}
 
 // Set up tabs library
 var tabsContainer = document.querySelector('.chrome-tabs');

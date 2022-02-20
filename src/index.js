@@ -18,7 +18,12 @@ const createWindow = () => {
 			contextIsolation: true
     	},
 		title: 'Actarius',
-		icon: __dirname + '/res/icon.png'
+		icon: __dirname + '/res/icon.png',
+		titleBarStyle: 'hidden',
+		trafficLightPosition: {x: 10, y: 13},
+		minHeight: 400,
+		minWidth: 400,
+		title: 'Actarius'
   	});
 
   	// and load the index.html of the app.
@@ -63,6 +68,10 @@ const createWindow = () => {
 		browserView.webContents.loadURL('https://www.duckduckgo.com/')
 
 		return newTabIndex
+	})
+
+	mainWindow.on('blur', () => {
+		mainWindow.setWindowButtonVisibility(true)
 	})
 };
 

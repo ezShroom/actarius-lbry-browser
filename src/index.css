@@ -20,19 +20,18 @@ body, html {
 	width: 100%;
 	border: none;
 	font-size: 0.94rem;
-	text-align: center;
+	/* text-align: center; */
 }
 #urlBar {
 	display: flex;
 	background-color: #fafafa;
-	align-items: center;
 	min-height: 42px;
 }
 #urlBar * {
 	margin: 0.3em;
 }
 #urlInput {
-	padding: 0.2em 0.3em 0.2em 0.3em;
+	padding: 0.2em 0.3em 0.2em 0.5em;
 	outline: none;
 	background-color: #e5e5e5;
 	border: 1px solid #e5e5e5;
@@ -73,6 +72,7 @@ img {
 /* Allow #addTab to take up any amount of space on the right, .chrome-tabs-content takes what remains */
 .chrome-tabs {
 	display: flex !important;
+	-webkit-app-region: drag;
 }
 .chrome-tabs-content {
 	flex-grow: 1;
@@ -81,6 +81,10 @@ img {
 	flex-shrink: 0;
 	margin-right: 0.5em;
 	padding: 0.15em;
+	-webkit-app-region: no-drag;
+}
+.chrome-tab-drag-handle {
+	-webkit-app-region: no-drag;
 }
 #addTabButton:hover {
 	background-color: #b8b8b8;

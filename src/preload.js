@@ -7,5 +7,5 @@ contextBridge.exposeInMainWorld('pathHelper', {
 
 // browserViewAPI - Allows browser to control certain elements of the BrowserView
 contextBridge.exposeInMainWorld('browserViewAPI', {
-    newTab: (windowSizeArray) => ipcRenderer.invoke('new-tab', windowSizeArray)
+    newTab: (windowSizeArray) => { return ipcRenderer.invoke('new-tab', windowSizeArray) }
 })
