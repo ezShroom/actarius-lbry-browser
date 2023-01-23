@@ -200,56 +200,27 @@ async function viewContentViaOdyseeAPI() {
 
     // Get streaming URL from Odysee backend
 
-    var urlResponse = await fetch("https://api.na-backend.odysee.com/api/v1/proxy?m=get", {
-        "credentials": "omit",
-        "headers": {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:93.0) Gecko/20100101 Firefox/93.0",
-            "Accept": "*/*",
-            "Accept-Language": "en-GB,en;q=0.5",
-            "Content-Type": "application/json-rpc",
-            "Sec-Fetch-Dest": "empty",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Site": "same-site"
-        },
-        "referrer": "https://odysee.com/",
-        "body": "{\"jsonrpc\":\"2.0\",\"method\":\"get\",\"params\":{\"uri\":\"" + urlInput.value + "\",\"save_file\":false},\"id\":1635237012803}",
-        "method": "POST",
-        "mode": "cors"
-    })
-    var urlResponseJSON = await urlResponse.json()
-    console.log(urlResponseJSON.result.streaming_url)
+    let resp = await fetch("https://lbry.pigg.es/$/api/get?uri=" + urlInput.value)
+    resp = await resp.json()
+    console.log(resp)
 
-    // Get file type from Blockchain lookup
-
-    var lookupResults = await fetch("https://api.na-backend.odysee.com/api/v1/proxy?m=resolve", {
-        "credentials": "omit",
-        "headers": {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:93.0) Gecko/20100101 Firefox/93.0",
-            "Accept": "*/*",
-            "Accept-Language": "en-GB,en;q=0.5",
-            "Content-Type": "application/json-rpc",
-            "Sec-Fetch-Dest": "empty",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Site": "same-site"
-        },
-        "referrer": "https://odysee.com/",
-        "body": "{\"jsonrpc\":\"2.0\",\"method\":\"resolve\",\"params\":{\"urls\":[\"" + urlInput.value + "\"]},\"id\":1635237012652}",
-        "method": "POST",
-        "mode": "cors"
-    })
-    var lookupResultsJSON = await lookupResults.json();
-    console.log(lookupResultsJSON)
-
-    // Map MIME type to content utility
-
-    const mimeType = lookupResultsJSON.result[urlInput.value].value.source.media_type
-    // TODO Check through custom content utilities before defaulting to built in ones
-    switch (mimeType) {
+    
+    // Handle stream_types
+    switch (resp.metadata.stream_type) {
         // Switch through built-in content utilities if no custom ones are available
-        case 'text/markdown':
-            currentWebview.loadURL(window.pathHelper.getContentUtilityURL('markdown') + `?url=${urlResponseJSON.result.streaming_url}&title=${lookupResultsJSON.result[urlInput.value].value.title}&timestamp=${lookupResultsJSON.result[urlInput.value].timestamp}`)
-            console.log(window.pathHelper.getContentUtilityURL('markdown'))
-            break
+        case 'document':
+            if (resp.metadata.source.media_type === 'text/markdown') currentWebview.loadURL(window.pathHelper.getContentUtilityURL('markdown') + `?url=${resp.streaming_url}&title=${resp.metadata.title}&timestamp=${resp.timestamp}`);
+            else if (resp.metadata.source.media_type === 'text/plain') currentWebview.loadURL(window.pathHelper.getContentUtilityURL('plain') + `?url=${resp.streaming_url}&title=${resp.metadata.title}&timestamp=${resp.timestamp}`);
+            break;
+        case 'image':
+            currentWebview.loadURL(window.pathHelper.getContentUtilityURL('image') + `?url=${resp.streaming_url}&title=${resp.metadata.title}&timestamp=${resp.timestamp}`)
+            break;
+        case 'video':
+            currentWebview.loadURL(window.pathHelper.getContentUtilityURL('video') + `?url=${resp.streaming_url}&title=${resp.metadata.title}&timestamp=${resp.timestamp}`)
+            break;
+        case 'audio':
+            currentWebview.loadURL(window.pathHelper.getContentUtilityURL('audio') + `?url=${resp.streaming_url}&title=${resp.metadata.title}&timestamp=${resp.timestamp}`)
+            break;
         case 'text/plain':
         case 'audio/mpeg':
         case 'audio/mp3':
@@ -262,7 +233,7 @@ async function viewContentViaOdyseeAPI() {
         case 'image/png':
         case 'image/webp':
         case 'application/pdf':
-           currentWebview.loadURL(urlResponseJSON.result.streaming_url + '?actariusDisplay=false')
+           currentWebview.loadURL(urlResponseJSON.streaming_url + '?actariusDisplay=false')
            break
         default:
             currentWebview.loadURL(window.pathHelper.getContentUtilityURL('noContentUtility'))
